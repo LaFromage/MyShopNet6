@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\MyShopNet6.props" />
+</Project>
