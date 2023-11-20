@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyShopNet6")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b36d44583bd24720488422f235a0ebb49646640")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae58ad96b66824347044966b8c2e5eb8092911fd")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyShopNet6")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyShopNet6")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

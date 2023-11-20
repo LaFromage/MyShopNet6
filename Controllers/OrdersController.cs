@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyShopNet6.Dtos;
 using MyShopNet6.Entities;
 
 namespace MyShopNet6.Controllers
@@ -41,7 +42,7 @@ namespace MyShopNet6.Controllers
 
         [HttpPut("Update/{id}")]
         //[Authorize]
-        public async Task<IActionResult> UpdateOrder(int id, Order updatedOrder)
+        public async Task<IActionResult> UpdateOrder(int id, OrderSimple updatedOrder)
         {
             if (id != updatedOrder.Id)
             {
@@ -54,8 +55,7 @@ namespace MyShopNet6.Controllers
             {
                 return NotFound();
             }
-
-            existingOrder.OrderDate = updatedOrder.OrderDate;
+            existingOrder.CustomerId = updatedOrder.CustomerId;
             existingOrder.Receiver = updatedOrder.Receiver;
             existingOrder.Address = updatedOrder.Address;
             existingOrder.Description = updatedOrder.Description;
@@ -64,7 +64,7 @@ namespace MyShopNet6.Controllers
             try
             {
                 await _context.SaveChangesAsync();
-                return Ok(new { Message = "Update successful" });
+                return Ok(new { Message = "Update successfully!" });
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -89,8 +89,8 @@ namespace MyShopNet6.Controllers
             }
             _context.Orders.Add(Order);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetOrder", new { id = Order.Id }, Order);
+            return Ok(new { Message = "Created successfully!" });
+            
         }
 
         [HttpDelete("{id}")]
@@ -109,7 +109,7 @@ namespace MyShopNet6.Controllers
 
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
-            return Ok(new { Message = "Delete successful" });
+            return Ok(new { Message = "Delete successfully!" });
         }
 
         private bool OrderExists(int id)

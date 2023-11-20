@@ -38,7 +38,6 @@ public partial class MyShopContext : DbContext
     public virtual DbSet<WebAction> WebActions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=ASUS-ROGSTRIX-G;Initial Catalog=MyShop;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -95,10 +94,10 @@ public partial class MyShopContext : DbContext
             entity.Property(e => e.Id).HasComment("Mã chi tiết");
             entity.Property(e => e.OrderId).HasComment("Mã hóa đơn");
             entity.Property(e => e.ProductId).HasComment("Mã hàng hóa");
-            entity.Property(e => e.Quantity)
+            /*entity.Property(e => e.Quantity)
                 .HasDefaultValue(1)
                 .HasComment("Số lượng mua");
-            entity.Property(e => e.UnitPrice).HasComment("Đơn giá bán");
+            entity.Property(e => e.UnitPrice).HasComment("Đơn giá bán");*/
 
             /*entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
                 .HasForeignKey(d => d.OrderId)

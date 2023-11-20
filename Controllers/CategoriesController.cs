@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MyShopNet6.Entities;
 
-namespace MyShopNet6.Controllers
+/*namespace MyShopNet6.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -62,4 +62,4 @@ namespace MyShopNet6.Controllers
             return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
-}
+}*/

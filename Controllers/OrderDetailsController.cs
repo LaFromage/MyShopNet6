@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyShopNet6.Dtos;
 using MyShopNet6.Entities;
 
 namespace MyShopNet6.Controllers
@@ -38,6 +40,43 @@ namespace MyShopNet6.Controllers
             return orderdetail;
         }
 
+        // PUT: api/OrderDetails/Update/id
+        [HttpPut("Update/{id}")]
+        //[Authorize]
+        public async Task<IActionResult> UpdateOrderDetail(int id, OrderDetailSimple updatedOrderDetail)
+        {
+            if (id != updatedOrderDetail.Id)
+            {
+                return BadRequest();
+            }
+
+            var existingOrderDetail = await _context.OrderDetails!.FindAsync(id);
+
+            if (existingOrderDetail == null)
+            {
+                return NotFound();
+            }
+
+            existingOrderDetail.ProductId = updatedOrderDetail.ProductId;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new { Message = "Update successfully!" });
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrderDetailExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+
         [HttpDelete("{id}")]
         //[Authorize]
         public async Task<IActionResult> DeleteOrderDetail(int id)
@@ -54,7 +93,7 @@ namespace MyShopNet6.Controllers
 
             _context.OrderDetails.Remove(orderdetail);
             await _context.SaveChangesAsync();
-            return Ok(new { Message = "Delete successful" });
+            return Ok(new { Message = "Delete successfully!" });
         }
 
         private bool OrderDetailExists(int id)

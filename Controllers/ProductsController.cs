@@ -16,6 +16,7 @@ namespace MyShopNet6.Controllers
             _context = ctx;
         }
 
+        // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
@@ -26,6 +27,7 @@ namespace MyShopNet6.Controllers
             return await _context.Products.ToListAsync();
         }
 
+        // GET: api/Products/id
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
@@ -43,6 +45,7 @@ namespace MyShopNet6.Controllers
             return Product;
         }
 
+        // PUT: api/Products/Update/id
         [HttpPut("Update/{id}")]
         //[Authorize]
         public async Task<IActionResult> UpdateProduct(int id, Product updatedProduct)
@@ -68,7 +71,7 @@ namespace MyShopNet6.Controllers
             try
             {
                 await _context.SaveChangesAsync();
-                return Ok(new { Message = "Update successful" });
+                return Ok(new { Message = "Update successfully!" });
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -83,18 +86,18 @@ namespace MyShopNet6.Controllers
             }
         }
 
+        // POST: api/Products
         [HttpPost]
         //[Authorize]
-        public async Task<ActionResult<Product>> PostProduct(Product Product)
+        public async Task<ActionResult<Product>> PostProduct(Product product)
         {
             if (_context.Products == null)
             {
                 return Problem("Entity set 'ProductStoreContext.Products'  is null.");
             }
-            _context.Products.Add(Product);
+            _context.Products.Add(product);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduct", new { id = Product.Id }, Product);
+            return Ok(new { Message = "Created successfully!" });
         }
 
         // DELETE: api/Products/id
